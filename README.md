@@ -18,4 +18,35 @@ Writes a set of manifests to a GitOps style repository and commits the result.
 
 ## Example
 
-TODO
+Note, in the example the `FLUX_KEY` is a deploy key that's allowed access to the
+GitHub repository.
+
+```yaml
+# .github/workflows/gitops.yml
+name: Deploy
+
+on: ['deployment']
+
+jobs:
+  deployment:
+
+    runs-on: 'ubuntu-latest'
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - uses: webfactory/ssh-agent@v0.1.1
+      with:
+        ssh-private-key: ${{ secrets.FLUX_KEY }}
+
+    - name: 'gitops'
+      uses: 'deliverybot/gitops@master'
+      with:
+        remote: 'git@github.com:colinjfw/kubernetes-guide.git'
+        branch: 'master'
+        # Copy the "pod.yml" manifest over to...
+        manifests: '["pod.yml"]'
+        # ... the deploy folder in the remote specified.
+        target: 'deploy'
+        token: '${{ github.token }}'
+```
