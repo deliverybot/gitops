@@ -1,0 +1,15 @@
+name: 'Deliverybot GitOps Deployment'
+description: 'Writes a set of manifests to a GitOps style repository and commits the result'
+author: 'deliverybot'
+inputs:
+  remote:
+    description: 'Remote gitops repository to clone and commit to. (required)'
+  branch:
+    description: 'Remote gitops repository branch. (required)'
+  manifests:
+    description: 'Manifests are a list of files (in json format) to copy to target. (required)'
+  target:
+    description: 'Folder name in the gitops repository to copy manifests to. (required)'
+runs:
+  using: 'node12'
+  main: 'index.js'
