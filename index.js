@@ -112,6 +112,9 @@ async function run() {
 
     await status("pending");
 
+    await exec.exec("git", ["config", "user.email", "support@deliverybot.dev"]);
+    await exec.exec("git", ["config", "user.name", "bot[gitops]"]);
+
     await exec.exec("git", [
       "clone",
       "--depth",
