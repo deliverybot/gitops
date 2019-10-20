@@ -104,6 +104,8 @@ async function run() {
     const branch = core.getInput("branch", { required: true });
     const target = core.getInput("target", { required: true });
     const dryRun = core.getInput("dry-run") || false;
+    const email = core.getInput("email") || "bot@deliverybot.dev";
+    const name = core.getInput("name") || "bot[gitops]";
     const manifests = getList(core.getInput("manifests", { required: true }));
 
     core.debug(`param: remote = "${remote}"`);
@@ -112,8 +114,8 @@ async function run() {
 
     await status("pending");
 
-    await exec.exec("git", ["config", "user.email", "support@deliverybot.dev"]);
-    await exec.exec("git", ["config", "user.name", "bot[gitops]"]);
+    await exec.exec("git", ["config", "--global", "user.email", email]);
+    await exec.exec("git", ["config", "--global", "user.name", name]);
 
     await exec.exec("git", [
       "clone",
