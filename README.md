@@ -1,5 +1,8 @@
 # GitOps action
 
+> [!WARNING]
+> This action is no longer maintained and the repository is archived. It runs on Node 12, which GitHub Actions no longer supports. See the [GitOps guide](https://deliverybot.dev/docs/integrations/gitops/) for a workflow that commits the new image with `kustomize edit set image` instead.
+
 Writes a set of manifests to a GitOps style repository and commits the result.
 
 **This is currently in beta and the API around this action may change.**
